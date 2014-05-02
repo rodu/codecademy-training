@@ -1,21 +1,15 @@
 maxFinder = function maxFinder(list){
-            
-    // Extractor function: extracts the max
-    // for the given property
-    // lookin in the list received on maxFinder
     return function findMax(prop){
-        
-        var max = 0,
-            maxes = _.filter(list, function filterFn(item){
-                if (item[prop] >= max){
-                    max = item[prop];
-                    return item;
-                }
-            });
-        maxes = _.filter(maxes, function filterMaxesFn(item){
+        // First finds the max value in the items for the given prop
+        var max = _.max(list,
+                        function maxFn(item){
+                            return item[prop];
+                        })[prop];
+
+        // Then filters the list to contain only the items that match
+        // the max value on the given prop
+        return _.filter(list, function filterMaxesFn(item){
             return item[prop] === max;
         });
-
-        return maxes;
     };
 };
