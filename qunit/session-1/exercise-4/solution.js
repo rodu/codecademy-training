@@ -1,14 +1,10 @@
-var PENALTY_YELLOW = 0.2,
-    PENALTY_RED = 0.5;
-    
 function calculatePlayerRate(player){
     var rate = (player.goals / player.totalShots) / player.appearances;
         
-    if (player.yellowCards){
+    if (+player.yellowCards){
         rate -= 0.2 * player.yellowCards;
     }
-    
-    if (player.redCards){
+    if (+player.redCards){
         rate -= 0.5 * player.yellowCards;
     }
     
