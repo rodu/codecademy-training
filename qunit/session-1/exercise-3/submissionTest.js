@@ -29,7 +29,4 @@ tests &= (account.getBalance() === 1150.23);
 account.withdraw(-0.1);
 tests &= (account.getBalance() === 1150.23);
 
-// Display accounts balance
-accounts.forEach(function(account){
-    accountsDisplay.innerHTML += displayBankAccountBalance(account);
-});
+return tests;
