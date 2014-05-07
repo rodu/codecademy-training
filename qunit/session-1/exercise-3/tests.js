@@ -23,30 +23,42 @@ QUnit.test("Opening a new account", 3,
         "Lisa account should hold the balance initially deposited");
 });
 
-QUnit.test("After depositing some money in an account", 1,
+QUnit.test("After depositing some money in an account", 3,
     function depositTest(){
     
     var // Creating a few bank accounts
-        maryAccont = new BankAccount(MARY_FULL_NAME, 100.0);
+        maryAccont = new BankAccount(MARY_FULL_NAME, 0.1);
+    
+    maryAccont.deposit(1200);
+    QUnit.equal(maryAccont.getBalance(), 1200.1,
+        "The new balance should be correctly recalculated");
     
     // Will add some money to the Mary's account
     maryAccont.deposit(120.02);
+    QUnit.equal(maryAccont.getBalance(), 1320.12,
+        "The new balance should be correctly recalculated");
     
-    QUnit.equal(maryAccont.getBalance(), 220.02,
+    maryAccont.deposit(0.01);
+    QUnit.equal(maryAccont.getBalance(), 1320.13,
         "The new balance should be correctly recalculated");
 });
 
-QUnit.test("After withdrawing some money from an account", 2,
+QUnit.test("After withdrawing some money from an account", 3,
     function withdrawSimpleTest(){
     
     var
+        maryAccount = new BankAccount(MARY_FULL_NAME, 1150.12),
         johnAccount = new BankAccount(JOHN_FULL_NAME, 50.20),
         lisaAccount = new BankAccount(LISA_FULL_NAME, 250.0);
     
+    maryAccount.withdraw(0.1);
     // John will withdraw some monwy
     johnAccount.withdraw(23.01);
     // lisa will also make a withdraw
     lisaAccount.withdraw(45.50);
+    
+    QUnit.equal(maryAccount.getBalance(), 1150.02,
+        "Mary account should hold the correct balance");
     
     QUnit.equal(johnAccount.getBalance(), 27.19,
         "John account should hold the correct balance");
